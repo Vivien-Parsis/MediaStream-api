@@ -14,14 +14,19 @@ fastify.get('/', (request, reply)=>{
 })
 fastify.post('/api/message/send', (request, reply) => {
     reply.headers({'Access-Control-Allow-Origin':'*'})
+    const currentDate = new Date()
     const email = request.body.email ? request.body.email : ""
     const message = request.body.message ? request.body.message : ""
-    fs.appendFile('./log/message.log',`email:${email}|message:${message}\n`, (err)=>{
+    fs.appendFile('./public/log/message.txt',`email:${email}|message:${message}|date:${new Date()}\n`, (err)=>{
         if(err){
             console.log(err)
         }
     })
     reply.send('message send')
+})
+fastify.get('/api/message/get', (request, reply) => {
+    reply.headers({'Access-Control-Allow-Origin':'*'},{'Content-type':'text/plain'})
+    reply.sendFile('log/message.log')
 })
 
 fastify.get('/api/film/get',(request,reply)=>{
