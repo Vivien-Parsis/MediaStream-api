@@ -1,6 +1,8 @@
 const fastify = require('fastify')({logger: true});
 const path = require('node:path');
 const fs = require('node:fs');
+const host = ("RENDER" in process.env) ? `0.0.0.0` : `localhost`;
+const port = process.env.PORT || 3000;
 
 fastify.register(require('@fastify/static'),{ 
     root: path.join(__dirname)+"/public",
@@ -31,7 +33,7 @@ fastify.get('/api/serie/get',(request,reply)=>{
     reply.sendFile('json/serie.json')
 })
 
-fastify.listen({ port : 3001 }, (err, address) => {
+fastify.listen({host: host, port: port }, (err, address) => {
     if (err) throw err;
     console.log(`listening to ${address}`);
 })
