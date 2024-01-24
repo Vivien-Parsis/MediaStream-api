@@ -26,7 +26,7 @@ fastify.post('/api/message/send', (request, reply) => {
 })
 fastify.get('/api/message/get', (request, reply) => {
     reply.headers({'Access-Control-Allow-Origin':'*'},{'Content-type':'text/plain'})
-    reply.sendFile('log/message.log')
+    reply.sendFile('log/message.txt')
 })
 
 fastify.get('/api/film/get',(request,reply)=>{
