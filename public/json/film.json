@@ -1,9 +1,43 @@
 [
     {
-        "nom":"lorem",
-        "video":"https://youtube.com"
+        "id":"1",
+        "nom":"Avatar",
+        "synospis":"Sur le monde extraterrestre luxuriant de Pandora vivent les Na'vi, des êtres qui semblent primitifs, mais qui sont très évolués. Jake Sully, un ancien Marine paralysé, redevient mobile grâce à un tel Avatar et tombe amoureux d'une femme Na'vi. Alors qu'un lien avec elle grandit, il est entraîné dans une bataille pour la survie de son monde.",
+        "video":"https://www.youtube.com/watch?v=5PSNL1qE6VY"
     },{
-        "nom":"lorem",
-        "video":"https://youtube.com"
+        "id":"2",
+        "nom":"Avatar: The way of water",
+        "synospis":"Jake Sully et Ney'tiri ont formé une famille et font tout pour rester aussi soudés que possible. Ils sont cependant contraints de quitter leur foyer et d'explorer les différentes régions encore mystérieuses de Pandora. Lorsqu'une ancienne menace refait surface, Jake va devoir mener une guerre difficile contre les humains.",
+        "video":"https://www.youtube.com/watch?v=a8Gx8wiNbs"
+    },{
+        "id":"3",
+        "nom":"Godzilla 2014",
+        "synospis":"Le physicien nucléaire Joseph Brody enquête sur de mystérieux phénomènes qui ont lieu au Japon. Refusant de s'en tenir à la version officielle qui évoque un tremblement de terre, le scientifique revient sur les lieux du drame accompagné par son fils Ford, soldat dans la Navy. Ils découvrent que les incidents ne sont pas liés à une catastrophe naturelle, mais à des monstres réveillés par des essais nucléaires dans le Pacifique au lendemain de la Seconde Guerre mondiale.",
+        "video":"https://www.youtube.com/watch?v=vIu85WQTPRc"
+    },{
+        "id":"4",
+        "nom":"Avenger",
+        "synospis":"Quand un ennemi inattendu fait surface pour menacer la sécurité et l'équilibre mondial, Nick Fury, directeur de l'agence internationale pour le maintien de la paix, connue sous le nom du S.H.I.E.L.D., doit former une équipe pour éviter une catastrophe mondiale imminente. Un effort de recrutement à l'échelle mondiale est mis en place, pour finalement réunir l'équipe de super héros de rêve, dont Iron Man, l'incroyable Hulk, Thor, Captain America, Hawkeye et Black Widow.",
+        "video":"https://www.youtube.com/watch?v=eOrNdBpGMv8"
+    },{
+        "id":"5",
+        "nom":"Top Gun",
+        "synospis":"Pete Maverick Mitchell, un jeune prodige du pilotage peu apprécié par sa hiérarchie, rejoint la très réputée école de l'aéronavale américaine, Top Gun, pour perfectionner ses techniques de combat aérien. Tous les étudiants concourent pour le titre de meilleur pilote.",
+        "video":"https://www.youtube.com/watch?v=xa_z57UatDY"
+    },{
+        "id":"6",
+        "nom":"Tenet",
+        "synospis":"Muni d'un seul mot, \"Tenet,\" et décidé à se battre pour sauver le monde, un homme sillonne l'univers crépusculaire de l'espionnage international. Sa mission le projettera dans une dimension qui dépasse le temps. Pourtant, il ne s'agit pas d'un voyage dans le temps, mais d'un renversement temporel.",
+        "video":"https://www.youtube.com/watch?v=L3pk_TBkihU"
+    },{
+        "id":"7",
+        "nom":"Joker",
+        "synospis":"Arthur Fleck, comédien raté, rencontre des voyous violents en errant dans les rues de Gotham City déguisé en clown. Méprisé par la société, Fleck s'enfonce peu à peu dans la démence et devient le génie criminel connu sous le nom de Joker, un dangereux tueur psychotique.",
+        "video":"https://www.youtube.com/watch?v=zAGVQLHvwOY"
+    },{
+        "id":"8",
+        "nom":"The Batman (2022)",
+        "synospis":"Dans sa deuxième année de lutte contre le crime, le milliardaire et justicier masqué Batman explore la corruption qui sévit à Gotham et notamment comment elle pourrait être liée à sa propre famille, les Wayne, à qui il doit toute sa fortune. En parallèle, il enquête sur les meurtres d'un tueur en série qui se fait connaître sous le nom de Sphinx et sème des énigmes cruelles sur son passage.",
+        "video":"https://www.youtube.com/watch?v=mqqft2x_Aa4"
     }
 ]
