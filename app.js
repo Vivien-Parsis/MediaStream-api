@@ -1,9 +1,12 @@
 const fastify = require('fastify')({logger: true});
 const path = require('node:path');
 const fs = require('node:fs');
+const cors = require("@fastify/cors")
 const host = ("RENDER" in process.env) ? `0.0.0.0` : `localhost`;
 const port = process.env.PORT || 3000;
-
+fastify.register(cors, { 
+    origin:"*"
+  })
 fastify.register(require('@fastify/static'),{ 
     root: path.join(__dirname)+"/public",
     prefix: '/',
@@ -54,6 +57,7 @@ fastify.post('/api/login/signin',(request,reply)=>{
 fastify.post('/api/login/signup',(request, reply)=>{
     const email = request.body.email ? request.body.email : ""
     const password = request.body.password ? request.body.password : ""
+    reply.headers({'Access-Control-Allow-Origin':'*'},{'Content-type':'application/json'})
     if(email.trim()=="" || password.trim()==""){
         reply.send({"message":"erreur"})
         return
