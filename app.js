@@ -17,7 +17,6 @@ const host = ("RENDER" in process.env) ? `0.0.0.0` : `localhost`
 
 const port = process.env.PORT || 3000
 const postgre_url = process.env.POSTGRE_URL || ""
-// console.log(`postgres://${postgre_username}:${postgre_password}@${postgre_url}:${postgre_port}/${postgre_database}`)
 console.log(postgre_url)
 fastify.register(require('@fastify/postgres'), {
     connectionString: postgre_url,
