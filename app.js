@@ -6,7 +6,7 @@ const host = ("RENDER" in process.env) ? `0.0.0.0` : `localhost`;
 const port = process.env.PORT || 3000;
 fastify.register(cors, { 
     origin:"*"
-  })
+})
 fastify.register(require('@fastify/static'),{ 
     root: path.join(__dirname)+"/public",
     prefix: '/',
