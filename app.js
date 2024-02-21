@@ -87,12 +87,7 @@ fastify.post('/api/login/signup',(request, reply)=>{
 })
 
 fastify.listen({host: host, port: port }, (err, address) => {
-<<<<<<< HEAD
     if (err) throw err
     console.log(`listening to ${address}`)
 })
-=======
-    if (err) throw err;
-    console.log(`listening to ${address}`);
-})
->>>>>>> 8a55b13a79a31cab44a2fc2bafa6bab2e29b3127
+  
