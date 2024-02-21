@@ -1,19 +1,34 @@
-const fastify = require('fastify')({logger: true});
-const path = require('node:path');
-const fs = require('node:fs');
+const fastify = require('fastify')({logger: true})
+const path = require('node:path')
+const fs = require('node:fs')
 const cors = require("@fastify/cors")
-const host = ("RENDER" in process.env) ? `0.0.0.0` : `localhost`;
-const port = process.env.PORT || 3000;
 fastify.register(cors, { 
     origin:"*"
-  })
+})
 fastify.register(require('@fastify/static'),{ 
     root: path.join(__dirname)+"/public",
     prefix: '/',
     decorateReply: true
 })
+const dotenv = require("dotenv")
+dotenv.config()
+
+const host = ("RENDER" in process.env) ? `0.0.0.0` : `localhost`
+
+const port = process.env.PORT || 3000
+const postgre_url = process.env.POSTGRE_URL || ""
+// console.log(`postgres://${postgre_username}:${postgre_password}@${postgre_url}:${postgre_port}/${postgre_database}`)
+console.log(postgre_url)
+fastify.register(require('@fastify/postgres'), {
+    connectionString: postgre_url,
+    ssl:true
+})
 fastify.get('/', (request, reply)=>{
     reply.send('')
+})
+fastify.get('/pg',(request, reply)=>{
+    
+    reply.send("")
 })
 fastify.post('/api/message/send', (request, reply) => {
     reply.headers({'Access-Control-Allow-Origin':'*'})
@@ -42,45 +57,37 @@ fastify.get('/api/serie/get',(request,reply)=>{
 })
 
 fastify.post('/api/login/signin',(request,reply)=>{
+    reply.headers({'Access-Control-Allow-Origin':'*'},{'Content-type':'application/json'})
     const email = request.body.email ? request.body.email : ""
     const password = request.body.password ? request.body.password : ""
-    reply.headers({'Access-Control-Allow-Origin':'*'},{'Content-type':'application/json'})
-    const users = require("./user.json")
-    for(let user of users){
-        if(user.email==email && user.password==password){
-            reply.send(user);
-            return;
+    fastify.pg.query('SELECT FROM userList WHERE email=$1 AND password=$2',
+    [email, password],(err,res)=>{
+        if(err){
+            return reply.send({err})
         }
-    }
-    reply.send({"message":"erreur"})
+        if(res.rowCount==0){
+            return reply.send({"message":"utilisateur introuvable"})
+        }
+        reply.send({email:email,password:password})
+    })
 })
 fastify.post('/api/login/signup',(request, reply)=>{
     const email = request.body.email ? request.body.email : ""
     const password = request.body.password ? request.body.password : ""
     reply.headers({'Access-Control-Allow-Origin':'*'},{'Content-type':'application/json'})
-    if(email.trim()=="" || password.trim()==""){
-        reply.send({"message":"erreur"})
-        return
-    }
-    const users = require("./user.json")
-    for(let user of users){
-        if(user.email==email && user.password==password){
-            reply.send({"message":"user already exist"});
-            return;
-        }
-    }
-    users.push({"email":email,"password":password})
-    fs.writeFile("./user.json",JSON.stringify(users),(err)=>{
+    fastify.pg.query('SELECT FROM userList WHERE email=$1 AND password=$2',
+    [email, password],(err,res)=>{
         if(err){
-            console.log(err)
-        }else{
-            console.log("successfull signup")
+            return reply.send({err})
         }
+        if(res.rowCount==1){
+            return reply.send({"message":"utilisateur existe deja"})
+        }
+        reply.send({"message":"successfully sign up"})
     })
-    reply.send({"message":"successfully sign up"})
 })
 
 fastify.listen({host: host, port: port }, (err, address) => {
-    if (err) throw err;
-    console.log(`listening to ${address}`);
+    if (err) throw err
+    console.log(`listening to ${address}`)
 })
