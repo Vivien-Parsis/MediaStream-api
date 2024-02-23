@@ -7,7 +7,7 @@ const FastifyRouter = (fastify) => {
         const email = request.body.email ? request.body.email : ""
         const message = request.body.message ? request.body.message : ""
         if(email=="" || !check.isValidEmail(email)){
-            return reply.send('error, missing email')
+            return reply.send('error, invalid email')
         }
         const currentdate = new Date()
         const currentdateFormated = `${currentdate.getFullYear()}-${(currentdate.getMonth()+1)<9?"0"+(currentdate.getMonth()+1):(currentdate.getMonth()+1)}-${(currentdate.getDate())<9 ? "0"+(currentdate.getDate()):(currentdate.getDate())}`
