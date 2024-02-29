@@ -61,7 +61,7 @@ const FastifyRouter = (fastify) => {
                 if(err){
                     return reply.send({err})
                 }
-                reply.send(res.rows)
+                reply.send(res.rows[0])
             })
         })
     })
@@ -106,7 +106,8 @@ const FastifyRouter = (fastify) => {
                 if(err){
                     return reply.send({err})
                 }
-                reply.send(res.rows)
+                console.log(res.rows)
+                reply.send(res.rows[0])
             })
         })
     })
