@@ -42,6 +42,29 @@ const FastifyRouter = (fastify) => {
             })
         })
     })
+    fastify.post('/api/film/search',(request,reply)=>{
+        reply.headers({'Access-Control-Allow-Origin':'*'},{'Content-type':'application/json'})
+        const email = request.body.email ? request.body.email : ""
+        const password = request.body.password ? request.body.password : ""
+        const id = request.query.id ? request.query.id : ""
+        const hashedPassword = crypto.createHash('sha256').update(password).digest("hex")
+        fastify.pg.query('SELECT email, password FROM userList WHERE email=$1 AND password=$2',
+        [email, hashedPassword],(err,res)=>{
+            if(err){
+                return reply.send({err})
+            }
+            if(res.rowCount==0){
+                return reply.send({"message":"utilisateur introuvable"})
+            }
+            fastify.pg.query('SELECT id, nom, synospis, video FROM film where id=$1',
+            [id],(err,res)=>{
+                if(err){
+                    return reply.send({err})
+                }
+                reply.send(res.rows)
+            })
+        })
+    })
     fastify.post('/api/serie/get',(request,reply)=>{
         reply.headers({'Access-Control-Allow-Origin':'*'},{'Content-type':'application/json'})
         const email = request.body.email ? request.body.email : ""
@@ -64,7 +87,29 @@ const FastifyRouter = (fastify) => {
             })
         })
     })
-    
+    fastify.post('/api/serie/search',(request,reply)=>{
+        reply.headers({'Access-Control-Allow-Origin':'*'},{'Content-type':'application/json'})
+        const email = request.body.email ? request.body.email : ""
+        const password = request.body.password ? request.body.password : ""
+        const id = request.query.id ? request.query.id : ""
+        const hashedPassword = crypto.createHash('sha256').update(password).digest("hex")
+        fastify.pg.query('SELECT email, password FROM userList WHERE email=$1 AND password=$2',
+        [email, hashedPassword],(err,res)=>{
+            if(err){
+                return reply.send({err})
+            }
+            if(res.rowCount==0){
+                return reply.send({"message":"utilisateur introuvable"})
+            }
+            fastify.pg.query('SELECT id, nom, synospis, video FROM serie where id=$1',
+            [id],(err,res)=>{
+                if(err){
+                    return reply.send({err})
+                }
+                reply.send(res.rows)
+            })
+        })
+    })
     fastify.post('/api/login/signin',(request,reply)=>{
         reply.headers({'Access-Control-Allow-Origin':'*'},{'Content-type':'application/json'})
         const email = request.body.email ? request.body.email : ""
