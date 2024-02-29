@@ -6,5 +6,4 @@ const isValidEmail = (email) => {
     }
     return match.length == 1 && match[0].length == email.length
 }
-
 module.exports = {isValidEmail}

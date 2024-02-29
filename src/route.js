@@ -20,24 +20,48 @@ const FastifyRouter = (fastify) => {
         })
     })
     
-    fastify.get('/api/film/get',(request,reply)=>{
+    fastify.post('/api/film/get',(request,reply)=>{
         reply.headers({'Access-Control-Allow-Origin':'*'},{'Content-type':'application/json'})
-        fastify.pg.query('SELECT id, nom, synospis, video FROM film',
-        [],(err,res)=>{
+        const email = request.body.email ? request.body.email : ""
+        const password = request.body.password ? request.body.password : ""
+        const hashedPassword = crypto.createHash('sha256').update(password).digest("hex")
+        fastify.pg.query('SELECT email, password FROM userList WHERE email=$1 AND password=$2',
+        [email, hashedPassword],(err,res)=>{
             if(err){
                 return reply.send({err})
             }
-            reply.send(res.rows)
+            if(res.rowCount==0){
+                return reply.send({"message":"utilisateur introuvable"})
+            }
+            fastify.pg.query('SELECT id, nom, synospis, video FROM film',
+            [],(err,res)=>{
+                if(err){
+                    return reply.send({err})
+                }
+                reply.send(res.rows)
+            })
         })
     })
-    fastify.get('/api/serie/get',(request,reply)=>{
+    fastify.post('/api/serie/get',(request,reply)=>{
         reply.headers({'Access-Control-Allow-Origin':'*'},{'Content-type':'application/json'})
-        fastify.pg.query('SELECT id, nom, synospis, video FROM serie',
-        [],(err,res)=>{
+        const email = request.body.email ? request.body.email : ""
+        const password = request.body.password ? request.body.password : ""
+        const hashedPassword = crypto.createHash('sha256').update(password).digest("hex")
+        fastify.pg.query('SELECT email, password FROM userList WHERE email=$1 AND password=$2',
+        [email, hashedPassword],(err,res)=>{
             if(err){
                 return reply.send({err})
             }
-            reply.send(res.rows)
+            if(res.rowCount==0){
+                return reply.send({"message":"utilisateur introuvable"})
+            }
+            fastify.pg.query('SELECT id, nom, synospis, video FROM serie',
+            [],(err,res)=>{
+                if(err){
+                    return reply.send({err})
+                }
+                reply.send(res.rows)
+            })
         })
     })
     
