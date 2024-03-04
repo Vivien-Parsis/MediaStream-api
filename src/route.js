@@ -24,6 +24,9 @@ const FastifyRouter = (fastify) => {
         reply.headers({'Access-Control-Allow-Origin':'*'},{'Content-type':'application/json'})
         const email = request.body.email ? request.body.email : ""
         const password = request.body.password ? request.body.password : ""
+        if(email=="" || !check.isValidEmail(email)){
+            return reply.send('error, invalid email')
+        }
         const hashedPassword = crypto.createHash('sha256').update(password).digest("hex")
         fastify.pg.query('SELECT email, password FROM userList WHERE email=$1 AND password=$2',
         [email, hashedPassword],(err,res)=>{
@@ -47,6 +50,9 @@ const FastifyRouter = (fastify) => {
         const email = request.body.email ? request.body.email : ""
         const password = request.body.password ? request.body.password : ""
         const id = request.query.id ? request.query.id : ""
+        if(email=="" || !check.isValidEmail(email)){
+            return reply.send('error, invalid email')
+        }
         const hashedPassword = crypto.createHash('sha256').update(password).digest("hex")
         fastify.pg.query('SELECT email, password FROM userList WHERE email=$1 AND password=$2',
         [email, hashedPassword],(err,res)=>{
@@ -69,6 +75,9 @@ const FastifyRouter = (fastify) => {
         reply.headers({'Access-Control-Allow-Origin':'*'},{'Content-type':'application/json'})
         const email = request.body.email ? request.body.email : ""
         const password = request.body.password ? request.body.password : ""
+        if(email=="" || !check.isValidEmail(email)){
+            return reply.send('error, invalid email')
+        }
         const hashedPassword = crypto.createHash('sha256').update(password).digest("hex")
         fastify.pg.query('SELECT email, password FROM userList WHERE email=$1 AND password=$2',
         [email, hashedPassword],(err,res)=>{
@@ -92,6 +101,9 @@ const FastifyRouter = (fastify) => {
         const email = request.body.email ? request.body.email : ""
         const password = request.body.password ? request.body.password : ""
         const id = request.query.id ? request.query.id : ""
+        if(email=="" || !check.isValidEmail(email)){
+            return reply.send('error, invalid email')
+        }
         const hashedPassword = crypto.createHash('sha256').update(password).digest("hex")
         fastify.pg.query('SELECT email, password FROM userList WHERE email=$1 AND password=$2',
         [email, hashedPassword],(err,res)=>{
