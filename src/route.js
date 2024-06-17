@@ -23,7 +23,6 @@ router.post('/api/message/send', (request, reply) => {
 
 router.post('/api/film/get',(request,reply)=>{
     reply.header({'Access-Control-Allow-Origin':'*','Content-type':'application/json'})
-    console.log(request.body)
     const email = request.body.email ? request.body.email : ""
     const password = request.body.password ? request.body.password : ""
     if(email=="" || !isValidEmail(email)){
