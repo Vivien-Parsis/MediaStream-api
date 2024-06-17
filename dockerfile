@@ -1,8 +1,7 @@
 FROM node:21-alpine
-RUN mkdir /vite_app
-ENV POSTGRE_URL = ""
-COPY . ./vite_app
-WORKDIR /vite_app
+RUN mkdir /mediastream_back
+COPY . ./mediastream_back
+WORKDIR /mediastream_back
 RUN npm i
 EXPOSE 3000
 CMD ["npm","run","start"]
